@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react';
+import "./App.css";
+import FormGenerator from "./components/FormGenerator";
+import Navbar from "./components/Navbar";
+import FormPreview from './components/FormPreview';
 
 function App() {
+  const [formFields, setFormFields] = useState([])
+  const handleAddField= (fieldData)=>{
+    setFormFields([...formFields,fieldData])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar />
+      <hr />
+      <div className="row">
+        <div className="col">
+          <FormGenerator onAddField={handleAddField}/>
+        </div>
+        <div className="col">
+          <FormPreview fieldData ={formFields}/>
+        </div>
+      </div>
     </div>
   );
 }
